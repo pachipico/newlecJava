@@ -1,0 +1,74 @@
+package oop.capsule;
+
+import java.util.Scanner;
+
+public class ExamList {
+	private Exam[] exams;
+	private int current;
+
+	public ExamList() {
+		this(3);
+	}
+
+	public ExamList(int size) {
+		this.exams = new Exam[3];
+		this.current = 0;
+	}
+
+	public void printList() {
+		printList(current);
+
+	}
+
+	public void printList(int size) {
+		Exam[] exams = this.exams;
+
+		for (int i = 0; i < size; i++) {
+			Exam exam = exams[i];
+			int kor = exam.getKor();
+			int eng = exam.getEng();
+			int math = exam.getMath();
+
+			int total = kor + eng + math;
+			float avg = total / 3.0f;
+			System.out.printf("kor: %d\n", kor);
+			System.out.printf("eng: %d\n", eng);
+			System.out.printf("math: %d\n", math);
+			System.out.printf("total: %3d\n", total);
+			System.out.printf("avg: %6.2f\n", avg);
+		}
+	}
+
+	public void inputList() {
+		Scanner sc = new Scanner(System.in);
+		int kor, eng, math;
+		System.out.printf("kor: ");
+		kor = sc.nextInt();
+		System.out.printf("eng: ");
+		eng = sc.nextInt();
+		System.out.printf("math: ");
+		math = sc.nextInt();
+
+		Exam exam = new Exam();
+		
+		exam.setKor(kor);
+		exam.setEng(eng);
+		exam.setMath(math);
+		
+
+		Exam[] exams = this.exams;
+		int size = this.current;
+
+		if (exams.length == size) {
+			Exam[] temp = new Exam[size + 5];
+			for (int i = 0; i < size; i++) {
+				temp[i] = exams[i];
+			}
+			this.exams = temp;
+		}
+		this.exams[this.current] = exam;
+		this.current++;
+
+	}
+
+}

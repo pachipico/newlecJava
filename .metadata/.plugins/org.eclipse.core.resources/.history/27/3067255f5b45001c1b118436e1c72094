@@ -1,0 +1,67 @@
+package oop.capsule;
+
+import java.util.Scanner;
+
+public class ExamList {
+	Exam[] exams;
+	int current;
+
+	public void printList() {
+		printList(current);
+
+	}
+
+	public void printList(int size) {
+		Exam[] exams = this.exams;
+
+		for (int i = 0; i < size; i++) {
+			Exam exam = exams[i];
+			int kor = exam.kor;
+			int eng = exam.eng;
+			int math = exam.math;
+
+			int total = kor + eng + math;
+			float avg = total / 3.0f;
+			System.out.printf("kor: %d\n", kor);
+			System.out.printf("eng: %d\n", eng);
+			System.out.printf("math: %d\n", math);
+			System.out.printf("total: %3d\n", total);
+			System.out.printf("avg: %6.2f\n", avg);
+		}
+	}
+
+	public void inputList() {
+		Scanner sc = new Scanner(System.in);
+		int kor, eng, math;
+		System.out.printf("kor: ");
+		kor = sc.nextInt();
+		System.out.printf("eng: ");
+		eng = sc.nextInt();
+		System.out.printf("math: ");
+		math = sc.nextInt();
+
+		Exam exam = new Exam();
+		exam.kor = kor;
+		exam.eng = eng;
+		exam.math = math;
+
+		Exam[] exams = this.exams;
+		int size = this.current;
+
+		if (exams.length == size) {
+			Exam[] temp = new Exam[size + 5];
+			for (int i = 0; i < size; i++) {
+				temp[i] = exams[i];
+			}
+			this.exams = temp;
+		}
+		this.exams[this.current] = exam;
+		this.current++;
+
+	}
+
+	public static void init(ExamList list) {
+		list.exams = new Exam[3];
+		list.current = 0;
+	}
+}

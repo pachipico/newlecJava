@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+/Users/jhs/Desktop/newlecOOP/.metadata/.plugins/org.eclipse.jdt.core
+687794749.index
+1865797976.index
+3787740244.index
