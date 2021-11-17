@@ -1,13 +1,13 @@
 package oop.capsule;
 
-public class Exam {
+public abstract class Exam {
 
 	private int kor;
 	private int eng;
 	private int math;
 
 	public Exam() {
-		this(0,0,0);
+		this(0, 0, 0);
 	}
 
 	public Exam(int kor, int eng, int math) {
@@ -16,13 +16,13 @@ public class Exam {
 		this.math = math;
 	}
 
-	public int total() {
+	public abstract int total();
+
+	protected int onTotal() {
 		return kor + eng + math;
 	}
 
-	public float avg() {
-		return total() / 3.0f;
-	}
+	public abstract float avg();
 
 	public int getKor() {
 		return kor;

@@ -2,17 +2,20 @@ package oop.capsule;
 
 import java.util.Scanner;
 
-public class ExamConsole {
+public abstract class ExamConsole {
 
-	private ExamList list = new ExamList();
+	private ExamList list;
 
-	
-	public void printList() {
-		printList(list.size());
+	public ExamConsole() {
+		list = new ExamList();
+	}
+
+	public void print() {
+		print(list.size());
 
 	}
 
-	public void printList(int size) {
+	public void print(int size) {
 
 		for (int i = 0; i < size; i++) {
 			Exam exam = list.get(i);
@@ -25,12 +28,14 @@ public class ExamConsole {
 			System.out.printf("kor: %d\n", kor);
 			System.out.printf("eng: %d\n", eng);
 			System.out.printf("math: %d\n", math);
+			onPrint(exam);
 			System.out.printf("total: %3d\n", total);
 			System.out.printf("avg: %6.2f\n", avg);
 		}
 	}
 
-	public void inputList() {
+
+	public void input() {
 		Scanner sc = new Scanner(System.in);
 		int kor, eng, math;
 		System.out.printf("kor: ");
@@ -40,9 +45,18 @@ public class ExamConsole {
 		System.out.printf("math: ");
 		math = sc.nextInt();
 
-		Exam exam = new Exam(kor, eng, math);
-
+		Exam exam = makeExam();
+		onInput(exam);
+		exam.setKor(kor);
+		exam.setEng(eng);
+		exam.setMath(math);
+		
 		list.add(exam);
 	}
+
+	protected abstract void onPrint(Exam exam);
+	protected abstract void onInput(Exam exam);
+
+	protected abstract Exam makeExam();
 
 }
